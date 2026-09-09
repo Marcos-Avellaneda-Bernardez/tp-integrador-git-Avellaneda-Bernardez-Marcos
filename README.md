@@ -19,4 +19,4 @@ Consta de :
 Marcos Avellaneda Bernardez
 
 ## Estado
-Primer borrador
+En desarrollo
