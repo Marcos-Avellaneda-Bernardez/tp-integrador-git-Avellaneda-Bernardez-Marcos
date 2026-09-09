@@ -1,0 +1,9 @@
+# Arduino
+*.tmp
+
+# Sistema
+.DS_STORE
+Thumbs.db
+
+# Editor
+.vscode/
