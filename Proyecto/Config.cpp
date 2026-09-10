@@ -2,6 +2,9 @@
 
 volatile uint8_t state_button = 0;
 
+Servo my_servo;
+int servo_angle = 0;
+
 void devices_setup() {
   // Left Side Setup
   pinMode(BUTTON_PIN_LEFT, BUTTON_MODE);
@@ -29,6 +32,17 @@ void devices_setup() {
     Right_buttonISR, 
     FALLING);
   */
+
+  // SERVO
+  ESP32PWM::allocateTimer(0);
+  ESP32PWM::allocateTimer(1);
+  ESP32PWM::allocateTimer(2);
+  ESP32PWM::allocateTimer(3);
+  my_servo.setPeriodHertz(50);
+  my_servo.attach(SERVO_PIN, 500, 2400);
+  delay(200);
+  //servo_angle = 90;
+  //my_servo.write(servo_angle);
 }
 
 void ARDUINO_ISR_ATTR Left_buttonISR() {
