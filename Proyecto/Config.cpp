@@ -1,9 +1,15 @@
+#include "esp32-hal.h"
 #include "Config.h"
 
 volatile uint8_t state_button = 0;
 
 Servo my_servo;
 int servo_angle = 0;
+
+// Variables usadas para el debounce
+static uint32_t last_left_interrupt  = 0;
+static uint32_t last_right_interrupt = 0;
+
 
 void devices_setup() {
   // Left Side Setup
@@ -45,10 +51,22 @@ void devices_setup() {
   //my_servo.write(servo_angle);
 }
 
+// Debounce Implemented inside ISR
+
 void ARDUINO_ISR_ATTR Left_buttonISR() {
-  state_button |= SWITCH_LEFT;
+  uint32_t now = micros();
+
+  if (now - last_left_interrupt > DEBOUNCE_DELAY) {
+    state_button |= SWITCH_LEFT;
+    last_left_interrupt = now;
+  }
 }
 
 void ARDUINO_ISR_ATTR Right_buttonISR() {
-  state_button |= SWITCH_RIGHT;
+  uint32_t now = micros();
+
+  if (now - last_right_interrupt > DEBOUNCE_DELAY) {
+    state_button |= SWITCH_RIGHT;
+    last_right_interrupt = now;
+  }
 }

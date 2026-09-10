@@ -31,6 +31,7 @@ constexpr int SERVO_MIN_ANGLE        = 0;
 constexpr int SERVO_STEP_ANGLE       = 10;
 
 constexpr uint32_t TIMER_DELAY       = 500;
+constexpr uint32_t DEBOUNCE_DELAY    = 50000;
 constexpr uint8_t BUTTON_MODE        = INPUT_PULLUP;
 constexpr uint8_t BUTTON_PRESSED     = LOW;
 constexpr uint8_t BUTTON_UNPRESSED   = HIGH;
